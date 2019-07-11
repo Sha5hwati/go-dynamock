@@ -6,10 +6,10 @@ import (
 )
 
 // Table - method for set Table expectation
-func (e *TransactWriteItemsExpectation) Table(table string) *TransactWriteItemsExpectation {
+/*func (e *TransactWriteItemsExpectation) Table(table string) *TransactWriteItemsExpectation {
 	e.table = &table
 	return e
-}
+}*/
 
 // WillReturns - method for set desired result
 func (e *TransactWriteItemsExpectation) WillReturns(res dynamodb.TransactWriteItemsOutput) *TransactWriteItemsExpectation {
