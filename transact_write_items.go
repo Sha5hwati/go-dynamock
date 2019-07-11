@@ -24,8 +24,9 @@ func (e *MockDynamoDB) TransactWriteItems(input *dynamodb.TransactWriteItemsInpu
 		foundTable := false
 		if x.table != nil {
 			for _, item := range input.TransactItems {
-				if x.table == item.Update.TableName || x.table == item.Put.TableName ||
-					x.table == item.Delete.TableName {
+				if (item.Update != nil && x.table == item.Update.TableName) ||
+					(item.Put != nil && x.table == item.Put.TableName) ||
+					(item.Delete != nil && x.table == item.Delete.TableName) {
 					foundTable = true
 				}
 			}
