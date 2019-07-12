@@ -22,20 +22,18 @@ func (e *MockDynamoDB) TransactWriteItems(input *dynamodb.TransactWriteItemsInpu
 	if len(e.dynaMock.TransactWriteItemsExpect) > 0 {
 		x := e.dynaMock.TransactWriteItemsExpect[0] //get first element of expectation
 
-		foundTable := false
+		//foundTable := false
 		if x.table != nil {
 			for _, item := range input.TransactItems {
 				if (item.Update != nil && *x.table == *item.Update.TableName) ||
 					(item.Put != nil && *x.table == *item.Put.TableName) ||
 					(item.Delete != nil && *x.table == *item.Delete.TableName) {
-					foundTable = true
+					//foundTable = true
 					break
 				}
 			}
 
-			if foundTable == false {
-				return nil, fmt.Errorf("Expect table %s not found", *x.table)
-			}
+			return nil, fmt.Errorf("Expect table %s not found", *x.table)
 		}
 
 		// delete first element of expectation
