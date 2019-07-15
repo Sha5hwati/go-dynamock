@@ -3,7 +3,6 @@ package dynamock
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"log"
 )
 
 // Table - method for set Table expectation
@@ -24,18 +23,19 @@ func (e *MockDynamoDB) TransactWriteItems(input *dynamodb.TransactWriteItemsInpu
 		x := e.dynaMock.TransactWriteItemsExpect[0] //get first element of expectation
 
 		//foundTable := false
-		log.Printf("x.table: %s", *x.table)
 		if x.table != nil {
-			for _, item := range input.TransactItems {
+			/*for _, item := range input.TransactItems {
 				if (item.Update != nil && *x.table == *item.Update.TableName) ||
 					(item.Put != nil && *x.table == *item.Put.TableName) ||
 					(item.Delete != nil && *x.table == *item.Delete.TableName) {
 					//foundTable = true
 					break
 				}
-			}
+			}*/
 
 			return nil, fmt.Errorf("Expect table %s not found", *x.table)
+		} else {
+			return nil, fmt.Errorf("x.table is nil")
 		}
 
 		// delete first element of expectation
