@@ -21,7 +21,7 @@ func (e *TransactWriteItemsExpectation) WillReturns(res dynamodb.TransactWriteIt
 func (e *MockDynamoDB) TransactWriteItems(input *dynamodb.TransactWriteItemsInput) (*dynamodb.TransactWriteItemsOutput, error){
 	if len(e.dynaMock.TransactWriteItemsExpect) > 0 {
 		x := e.dynaMock.TransactWriteItemsExpect[0] //get first element of expectation
-
+		return nil, fmt.Errorf("x.table is nil")
 		//foundTable := false
 		if x.table != nil {
 			/*for _, item := range input.TransactItems {
